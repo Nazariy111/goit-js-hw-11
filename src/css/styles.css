@@ -71,8 +71,8 @@
   margin-top: 50px;
 }
 
-.is-hiden {
-  opacity: 0;
+form {
+  margin-bottom: 16px;
 }
 
 .gallery {
@@ -111,4 +111,64 @@
   line-height: 2;
   letter-spacing: 0.04em;
   color: #2e2f42;
+}
+
+input {
+  width: 272px;
+  height: 40px;
+  border-radius: 8px;
+  padding-left: 16px;
+  border: 1px solid #808080;
+  padding-left: 16px;
+  color: #2E2F42;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+input::placeholder {
+  color: #2E2F42;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+input:hover {
+  border: 1px solid #000;
+}
+
+input:active,
+input:focus {
+  border: 1px solid #808080;
+}
+
+button {
+  background-color: #4e75ff;
+  border: none;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  color: #fff;
+  border-radius: 8px;
+  padding: 8px 16px;
+  width: 91px;
+  height: 40px;
+  margin-left: 16px;
+}
+
+button:hover {
+  background-color: #6C8CFF;
+}
+
+.disabled,
+.disabled:hover {
+  background-color: #808080;
 }

@@ -11,7 +11,6 @@ const refs = {
     btnEl: document.querySelector('.search-btn'),
 };
 
-
 const loader = document.querySelector('.loader-box');
 
 refs.formEl.addEventListener('submit', onFormSubmit);
@@ -19,32 +18,38 @@ refs.formEl.addEventListener('input', e => {
     const searchWord = refs.formEl.elements.word.value.trim();
     if (searchWord) {
         refs.btnEl.disabled = false;
+        refs.btnEl.classList.remove('disabled');
     };
 });
 
 
 function onFormSubmit(e) {
     e.preventDefault();
-    loader.classList.remove('.is-hiden');
-    
+    refs.formEl.insertAdjacentHTML("afterend", '<div class="loader-box "><span class="loader"></span></div>');
+
+    const loader = document.querySelector('.loader-box');
+
     const galleryParentElem = document.querySelector('.gallery');
     if (galleryParentElem) { galleryParentElem.remove(); };
     
     const galleryParentElemMarkup = '<div class="gallery"></div>';
     refs.galleryEl.insertAdjacentHTML("afterbegin", galleryParentElemMarkup);
+
     const searchWord = e.target.elements.word.value.trim();
+
     if (searchWord) { 
         searchImage(searchWord)
             .then(data => {
                 let imagesArray = data.hits;
+
                 if (imagesArray.length > 0) {
-                    // loader.remove();
-                    loader.classList.add('.is-hiden');
+                    loader.remove();
                     renderImages(imagesArray);
                     
                     simpleLightBox = new SimpleLightbox('.gallery a', { captionsData: 'alt', captionDelay: 250 }).refresh();
                 } else {
-                    loader.classList.add('.is-hiden');
+                    loader.remove();
+
                     iziToast.show({
                         timeout: 5000,
                         position: 'topCenter',
@@ -57,7 +62,8 @@ function onFormSubmit(e) {
                 };
             });
     } else { 
-        loader.classList.add('.is-hiden');
+        loader.remove();
+        
         iziToast.show({
             timeout: 5000,
             position: 'topCenter',
@@ -71,6 +77,7 @@ function onFormSubmit(e) {
 
     refs.formEl.reset();
     refs.btnEl.disabled = true;
+    refs.btnEl.classList.add('disabled');
 
 };
 
@@ -82,7 +89,7 @@ function searchImage(searchWord) {
 
     const url = URL + END_POINT + PARAMS; 
 
-    return fetch(url).then(res => res.json());
+    return fetch(url).then(res => res.json()).catch(error => console.log(error)); 
 };
 
 
